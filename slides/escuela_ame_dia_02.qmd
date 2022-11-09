@@ -1,76 +1,63 @@
 ---
-title: "Introduction to Tidyverse"
+title: "Fundamentos de Programación y Visualización de Datos en R"
+subtitle: "Introducción a Tidyverse"
 author: "Guillermo Basulto-Elias"
-date: "2022-09-29"
+date: "2022-11-10"
 institute: "InTrans - Iowa State University"
 format: revealjs
 editor: visual
 slide-number: true
 ---
 
-## Before we Start
-
-Install tidyverse.
-
-```{r, eval = FALSE, echo = TRUE}
-install.packages(tidyverse)
-```
-
-Download "tidyverse_code.R" from from <https://www.dropbox.com/s/tft4ygqd53i760k/tidyverse_code.R?dl=0> or from QR:
-
-![](images/qrcode_34206142_.png)
-
-## 
-
 ## Introduction to Tidyverse
 
--   Packages are the backbone of R.
+-   Los paquetes de R es lo que lo hacen resaltar sobre otros lenguajes de programación
 
--   Anyone can contribute with a package at any time.
+-   Cualquiera puede contribuir con un paquete en cualquier momento
 
--   Some popular packages:
+-   Algunos paquetes populares:
 
-    -   **lme4**: Linear mixed-effects models.
+    -   **lme4**: Modelos lineales con effectos mixtos.
 
-    -   **Rcpp**: Speed R-code with C++.
+    -   **Rcpp**: Acelerar código de R con C++.
 
-    -   **caret:** machine learning tools.
+    -   **caret:** Herramientas de *machine learning*.
 
-    -   **shiny**: elaborate dashboards.
+    -   **shiny**: Crear tableros interactivos.
 
-## Pros and Cons of R packages
+## Ventajas y Desventajas de Paquetes de R
 
--   Pros:
+-   Ventajas:
 
-    -   Open accessibility generates feedback (through CRAN or GitHub).
+    -   Accesibilidad inmediata produce retroalimentación (a través de [CRAN](https://cran.r-project.org/), GitHub, o [Bioconductor](https://www.bioconductor.org/)).
 
-    -   New techniques might be quickly available.
+    -   Nuevos métodos están disponibles al instante.
 
--   Cons:
+-   Desventajas:
 
-    -   Lack of consistency between packages and methods
+    -   Falta de consistencia entre paquetes y métodos
 
-    -   Packages could be pulled out at any moment.
+    -   Los paquetes pueden ser retirados en cualquier instante
 
-    -   Developers could stop maintenance of packages.
+    -   Creadores pueden dejar de dar mantenimiento a paq.
 
-    -   Packages might not be reliable.
+    -   Algunos paquetes podrían no ser confiables
 
-## What is Tidyverse?
+## ¿Qué es el Tidyverse?
 
 > The tidyverse is an opinionated [**collection of R packages**](https://www.tidyverse.org/packages) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
 
--   Sponsored by [Posit](https://posit.co/) (formerly RStudio).
+-   Patrocinado por [Posit](https://posit.co/) (formerly RStudio).
 
--   Perks:
+-   Ventajas:
 
-    -   Constant development.
+    -   Desarrollo constante
 
-    -   Consistency.
+    -   Consistencia
 
-    -   Comprehensive documentation.
+    -   Documentation amplia y detallada
 
-## Core Tidyverse Packages
+## Paquetes Nucleares de Tidyverse
 
 -   Read files
 
