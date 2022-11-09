@@ -9,8 +9,6 @@ lang: es
 
 ## Antes de Comenzar
 
--   Accede a esta presentación en:
-
 -   Asegúrate de instalar
 
     -   R: <https://cloud.r-project.org/>
@@ -19,7 +17,7 @@ lang: es
 
     -   Paquete tidyverse: ejecuta `install.packages("tidyverse")` en la consola.
 
--   Baja el código de hoy en:
+-   Baja el código de hoy en: <https://github.com/gbasulto/ame>
 
 ## Objetivos
 
