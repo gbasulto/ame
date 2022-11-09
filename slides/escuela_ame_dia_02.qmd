@@ -59,17 +59,18 @@ slide-number: true
 
 ## Paquetes Nucleares de Tidyverse
 
--   Read files
+-   Leer archivos
 
-    -   **readr** Fast way to read data.
+    -   **readr** Archivos de texto
+    -   **readxl** Archivos de Excel
 
--   Plot data
+-   Gráficos
 
-    -   **ggplot2** Grammar-of-graphics plots. Plenty of [useful extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+    -   **ggplot2** Gráficos. Muchas [extensiones útiles](https://exts.ggplot2.tidyverse.org/gallery/).
 
 ## Core Tidyverse Packages (cont'd)
 
--   Prepare/manipulate data
+-   Preparación/manipulación de datos
 
     -   **dplyr** Data manipulation centered around data frames.
 
