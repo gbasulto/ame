@@ -37,7 +37,7 @@ Se hará énfasis en el uso de recursos disponibles para aprender y mejorar la p
 
     -   Guía de funciones base (<https://posit.co/wp-content/uploads/2022/10/base-r.pdf>)
 
-    -   Guía de ggplot2 ([https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdfhttps://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf))
+    -   Guía de ggplot2 ([https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf))
 
 -   Otros:
 
@@ -323,7 +323,7 @@ ggplot(
     -   Usa `facet_wrap` para separar el gráfico por transmisión.
 
     -   Usa el parámetro `color` dentro de `aes()`.
-    
+
     -   Usa `labs()` y `theme()`
 :::
 
@@ -344,3 +344,17 @@ ggplot(
 ```
 :::
 :::
+
+## Preguntas
+
+-   Durante los siguientes tres días:
+
+    -   A: basulto\@iastate.edu
+
+    -   Asunto: Duda escuela AME
+
+    -   Cuerpo de correo:
+
+        -   Describe tu pregunta, error.
+
+        -   De preferencia adjunta código que yo pueda ejecutar Por ejemplo, si te sale un error X, adjunta o pega el código que genera ese error.
