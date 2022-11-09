@@ -189,7 +189,7 @@ rm(long_crashes_tbl, crashes_tbl)
 
 # stringr -----------------------------------------------------------------
 
-corn_song <- 
+baby_shark_song <- 
 "
 Baby Shark, doo-doo, doo-doo
 Baby Shark, doo-doo, doo-doo
@@ -229,28 +229,28 @@ It's the end, doo-doo, doo-doo
 It's the end"
 
 ## Print
-corn_song
-cat(corn_song) ## Nicer print respecting special characters
+baby_shark_song
+cat(baby_shark_song) ## Nicer print respecting special characters
 
 ## str_replace
-corn_song %>%  ## Only the first
-  str_replace("corn", "pomegranate") %>% 
+baby_shark_song |>  ## Only the first
+  str_replace("Shark", "Pirahna") |>  
   cat()
-corn_song %>%  ## Only the first
-  str_replace_all("corn", "pomegranate") %>% 
+baby_shark_song %>%  ## Only the first
+  str_replace_all("Shark", "Piranha") %>% 
   cat()
-corn_song %>%  ## Using regular expressions to include capital letters
-  str_replace_all("(c|C)orn", "pomegranate") %>% 
+baby_shark_song %>%  ## Using regular expressions to include capital letters
+  str_replace_all("(, |\\)|\\()", " - ") %>% 
   cat()
 
 ## str_detect
-corn_song %>%  ## Using regular expressions to detect several words. It's false
-  str_detect("(soy|wheat)") 
-corn_song %>%  ## Must be true
-  str_detect("corn") 
+baby_shark_song %>%  ## Using regular expressions to detect several words. It's false
+  str_detect("(Octopus|Whale)") 
+baby_shark_song %>%  ## Must be true
+  str_detect("Shark") 
 
 ## str_length
-corn_song %>% str_length()
+baby_shark_song %>% str_length()
 
 ## Delete variables
 rm(corn_song)

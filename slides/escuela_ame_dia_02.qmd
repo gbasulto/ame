@@ -62,50 +62,49 @@ slide-number: true
 -   Leer archivos
 
     -   **readr** Archivos de texto
-    -   **readxl** Archivos de Excel
 
 -   Gráficos
 
     -   **ggplot2** Gráficos. Muchas [extensiones útiles](https://exts.ggplot2.tidyverse.org/gallery/).
 
-## Core Tidyverse Packages (cont'd)
+## Paquetes Nucleares de Tidyverse (cont.)
 
 -   Preparación/manipulación de datos
 
-    -   **dplyr** Data manipulation centered around data frames.
+    -   **dplyr** Manipulación de centrada en cuadros de datos
 
-    -   **tidyr** Helper functions to get tidy data.
+    -   **tidyr** Funciones auxiliares para limpiar datos
 
-    -   **purrr** Toolkit to handle vectors and lists.
+    -   **purrr** Herramientas para vectores y listas
 
-    -   **tibble** Data frames with attributes to make their content more explicit.
+    -   **tibble** Cuadros de datos con columnas explícitas
 
-    -   **stringr** Tools to work with strings.
+    -   **stringr** Herramientas para cadenas de caracteres
 
-    -   **forcats** Tools to manipulate factors.
+    -   **forcats** Herramientas para factores
 
-    -   **lubridate** (to be included) Date and time operations.
+    -   **lubridate** (será incluido) Operaciones con fechas y estampas de tiempo
 
-## Packages Loaded by Tidyverse
+## Paquetes Cargados por Tidyverse
 
 ```{r, eval = TRUE, echo=TRUE, message=TRUE}
-## Packages loaded by tidyverse. Pay attention to message.
+## Paquetes Carcagos por Tidyverse. Presta atención al mensaje
 library(tidyverse)
 ```
 
-## Alternatives to Tidyverse Packages
+## Alternativas a Paquetes de Tidyverse
 
--   In R, there might be more than one package doing the same or very similar things.
+-   En R, puede haber más de un paquete haciendo las mismas cosas.
 
--   Some alternatives:
+-   Aquí algunas alternativas a paquetes que cubriremos hoy:
 
-    -   **ggplot2** `lattice`, base plots.
+    -   **ggplot2** `lattice`, gráficos base.
 
-    -   **Data manipulation** `data.table`, apply family (`apply`, `sapply`, `mapply`, etc.).
+    -   **Manipulación de datos** `data.table`, familia apply (`apply`, `sapply`, `mapply`, etc.).
 
-    -   **Read files** `data.table`, base funcions (`read.csv`, `read.delim`, etc.)
+    -   **Leer archivos** `data.table`, funciones base (`read.csv`, `read.delim`, etc.)
 
-## Main Resources
+## Principales Recursos
 
 -   [Website of each package](https://www.tidyverse.org/packages/) in tidyverse website.
 
