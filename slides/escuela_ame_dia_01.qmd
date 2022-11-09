@@ -1,0 +1,298 @@
+---
+title: "Fundamentos de Programación y Visualización de Datos en R"
+subtitle: "Estructuras Básicas y Funcionales Esenciales de R + Introducción a GGPLOT2"
+author: "Guillermo Basulto Elías"
+format: revealjs
+editor: visual
+lang: es   
+---
+
+## Antes de Comenzar
+
+-   Accede a esta presentación en:
+
+-   Asegúrate de instalar
+
+    -   R: <https://cloud.r-project.org/>
+
+    -   RStudio: <https://www.rstudio.com/products/rstudio/download/#download>
+
+    -   Paquete tidyverse: ejecuta `install.packages("tidyverse")` en la consola.
+
+-   Baja el código de hoy en:
+
+## Objetivos
+
+-   **Día 1**. Cubrir las estructuras de datos y funcionalidades esenciales en R + Introducción a `ggplot2`
+
+-   **Día 2.** Aprender funcionamiento básico de paquetes para ciencia de datos
+
+-   **Día 3**. Gráficas en \`ggplot2\` y algunas extensiones
+
+Se hará énfasis en el uso de recursos disponibles para aprender y mejorar la programación en R.
+
+## Recursos
+
+-   Principales recursos:
+
+    -   R Para Ciencia de Datos (<https://es.r4ds.hadley.nz/>)
+
+    -   Guía de funciones base (<https://posit.co/wp-content/uploads/2022/10/base-r.pdf>)
+
+    -   Guía de ggplot2 ([https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdfhttps://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf))
+
+-   Otros:
+
+    -   Datos: <https://cienciadedatos.github.io/datos/>
+
+# Elementos Básicos de R
+
+## R y RStudio
+
+-   R: software gratuito para cómputo estadístico y gráficos
+
+-   RStudio: entorno de desarrollo integrado (IDE) para el lenguaje de programación R, desarrollado por la compañía [POSIT](https://posit.co/)
+
+## Tipos Básicos de Datos
+
+-   Caracteres
+
+-   Numéricos (real or decimal)
+
+-   Enteros
+
+-   Lógicos
+
+-   Complejos
+
+## Estructuras Básicas de Datos
+
+-   **Valores**: Pueden ser diferentes tipos de datos
+
+-   **Vectores**: Arreglo de valores del mismo tipo
+
+-   **Matrices**: Arreglo rectancular de valores del mismo tipo
+
+-   **Cuadros de datos**: Arreglo rectangular de valores cuyas columnas pueden ser de diferente tipo
+
+-   **Listas**: Arreglo de objetos de cualquier tipo
+
+## Crear Objetos y Assignar Valores
+
+-   Es posible asignar valores en `R` usando `<-` o `=`
+
+```{echo = TRUE}
+xx <- 3
+```
+
+-   O incluso `->` para asignar el lado izquierdo al derecho.
+
+-   También se puede usar la función `assign()` para asignar objetos a caracteres (ver código).
+
+## Construir Vectores
+
+```{r, eval= FALSE, echo = TRUE}
+c(1, 2, 3) ## c()
+
+c(a = 1, b = 2, c = 3) ## Vector con nombres
+
+1:3 ## Usando dos puntos para incrementos unitarios
+
+seq(1, 3, by = 0.5) ## Sucesión definiendo incremento
+
+seq(1, 3, length.out = 9) ## Sucesión definiendo tamaño total
+
+rep(0:2, each = 2) ## Repitiendo valores
+
+## Repitiendo valores especificando número de veces
+rep(0:2, times = 1:3)
+```
+
+## Acceder a Elementos
+
+-   Los elementos se pueden acceder por índice o por nombre (si el objeto tiene nombres)
+
+```{r, echo = TRUE, eval = FALSE}
+# Estructuras
+y2 <- c(a = 1, b = 2, c = 3)
+y5 <- matrix(c(7, 8, 9, 0), nrow = 2, ncol = 2)
+y6 <- data.frame(v1 =  y2, v2 = -y2)
+y7 <- list(a = y2, b = y5, c = y6)
+
+## Por índice
+y2[2]; y5[2, 2]; y6[3, 1]; y7[[3]]
+
+## Por nombre
+y2["b"]; y6$v1[3]; y7$c
+
+
+```
+
+## Funciones
+
+-   Existen muchas funciones en R para
+
+    -   operaciones matemáticas (e.g., abs, sqrt, cos, sin, exp, log, max, sum)
+
+    -   operaciones de caracteres (e.g., substr, paste, toupper, tolower)
+
+    -   probabilidad (e.g., dnorm, qnorm, rnorm, pnorm, mean, sd)
+
+## Funciones (Continuación)
+
+-   Es posible definir funciones propias
+
+```{r, echo=TRUE, eval=FALSE}
+## Ejemplo: calcula el valor absoluto de la diferencia
+myfnc <- function(a, b) {
+  abs(a - b)
+}
+```
+
+-   La mayoría de las funciones están disponibles a través de **paquetes**
+
+## Paquetes
+
+-   Son extensiones de R
+
+-   Cualquier persona puede contribuir con un paquete
+
+-   Los paquetes pueden contener datos
+
+-   Se instalan a través de la base de paquetes de R (CRAN), Bioconductor o GitHub, entre otros.
+
+## Buscar Ayuda
+
+-   La mayoría de las funciones de R están bien documentadas. Hay muchas maneras de revisar la ayuda.
+
+-   `?cos` o `help("cos")`: documentación de `cos()`.
+
+-   `??cos`: documentación de `cos()` disponible en todos los paquetes, no solo en los paquetes cargados.
+
+-   En RStudio:
+
+    -   Seleccionar la función y presionar la tecla F1 mostrará la documentación.
+
+    -   También es posible buscar directamente en el panel de ayuda de RStudio.
+
+## Ejercicio
+
+1.  Abre la guía de [funciones base de R producida](https://posit.co/wp-content/uploads/2022/10/base-r.pdf) por Posit.
+2.  Busca como generar valores de una variable normal.
+3.  Genera 101 valores de una normal con media 0 y desviación estándar 3 y guarda los valores en `e`
+4.  Genera una sucesión de números del 0 al 50 en incrementos de 0.5 y almacena los valores en x.
+5.  Define variables a y b con valores -10 y 0.3.
+6.  Asigna a `y` el vector `a + b * y`
+
+## Ejercicio (Cont.)
+
+7.  Ajusta el modelo lineal `y ~ x` con la función `lm()` y asígnalo a una variable llamada "modelo".
+8.  Grafica `y ~ x` usando la función `plot`.
+9.  Extrae los valores estimados usando la función `coef`.
+
+# Introducción a GGPLOT2
+
+## Gramática de Gráficos
+
+-   GGPLOT2 usa la llamada gramática de gráficos
+
+-   De Hadley Wickham (autor de `ggplot2`):
+
+> Una gramática de gráficos es una herramienta que nos permite describir los componentes de una gráfica de manera concisa
+
+## Estructura de Gráfico de GGPLOT2
+
+1.  Datos.
+2.  Variables.
+3.  Sistema de coodenadas.
+4.  Geometrías.
+
+## Estructura de Gráfico de GGPLOT2
+
+```{r, echo = TRUE, eval = TRUE}
+library(ggplot2)
+
+## Datos y gráfico base
+ggplot(data = cars) +
+  ## Especificar x y y
+  aes(speed, dist) +
+  ## Sistema de coordenadas (cartesiano con proporción fija)
+  coord_fixed(ratio = 1 / 8) +
+  ## Geometría
+  geom_point()
+```
+
+## Gráficos de Una Variable
+
+-   De la guía de `ggplot2`:
+
+```{r, echo=TRUE, eval=FALSE}
+
+g_base <- ggplot(mtcars, aes(wt)) ## Base
+
+g_base + geom_area(stat = "bin") ## Área
+
+g_base + geom_density(kernel = "gaussian") ## Densidad
+
+g_base + geom_dotplot() ## Gráfico de puntos
+
+g_base + geom_freqpoly()  ## Frecuencia con polinomio
+
+g_base + geom_histogram(binwidth = 0.5) ## Histograma
+
+ggplot(mtcars, aes(sample = mpg)) + geom_qq() ## Gráfico cuantil-cuantil
+
+```
+
+## Gráficos Continua-Discreta
+
+-   De la guía de `ggplot2`:
+
+```{r, echo=TRUE, eval=FALSE}
+f <- ggplot(
+  data = transform(mtcars, cyl = as.factor(cyl)), 
+  aes(cyl, mpg))
+f                                                    ## Base
+f + geom_col()                                       ## Barras 
+f + geom_boxplot()                                   ## Boxplot
+f + geom_dotplot(binaxis = "y", stackdir = "center") ## Puntos
+f + geom_violin(scale = "area")                      ## Violín
+
+## Unas mejoras
+f + 
+  geom_boxplot(fill = "lightgoldenrod", color = "gray80") +
+  labs(x = "Cilindros", y = "MPG") +
+  coord_flip() +
+  theme_dark()
+```
+
+## Gráficos Continua-Continua
+
+-   De la guía de `ggplot2`:
+
+```{r, echo=TRUE, eval=FALSE}
+e <- ggplot(
+  data = transform(mtcars, 
+                   car = row.names(mtcars)), 
+  aes(hp, mpg))
+
+e ## Base
+e + geom_point()  # Puntos
+e + geom_label(aes(label = car), nudge_x = 1, nudge_y = 1) # Etiquetas
+e + geom_rug(sides = "bl") ## ??
+e + geom_smooth(method = lm) ## Modelo
+e + geom_text(aes(label = car))
+```
+
+## Gráficos Discreta-Discreta
+
+-   De la guía de `ggplot2`:
+
+```{r, echo=TRUE, eval=FALSE}
+g <- ggplot(
+  data = transform(mtcars, cyl = as.factor(cyl), am = as.factor(am)), 
+  aes(cyl, am))
+
+g + geom_count() ## Conteos
+g + geom_jitter(height = 0.15, width = 0.15)  ## Agregando ruido
+```

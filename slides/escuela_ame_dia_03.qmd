@@ -1,0 +1,75 @@
+---
+title: "Fundamentos de Programación y Visualización de Datos en R"
+author: "Guillermo Basulto Elías"
+format: revealjs
+editor: visual
+---
+
+## Packages
+
+-   ggplot2
+
+-   ggmosaic
+
+-   patchwork
+
+-   plotly
+
+-   gghighlight
+
+-   ggrepel
+
+-   ggpubr
+
+-   ggalt
+
+-   ggimages
+
+-   ggthemes
+
+## ttt
+
+```{r}
+library(ggplot2)
+
+library(gghighlight)
+
+library(ggrepel)
+
+library(ggpubr)
+
+library(patchwork)
+
+library(ggalt)
+
+library(ggimage)
+
+library(ggmosaic)
+
+library(ggthemes)
+
+library(plotly)
+
+library(esquisse)
+
+```
+
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```

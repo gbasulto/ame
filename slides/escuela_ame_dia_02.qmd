@@ -1,0 +1,295 @@
+---
+title: "Introduction to Tidyverse"
+author: "Guillermo Basulto-Elias"
+date: "2022-09-29"
+institute: "InTrans - Iowa State University"
+format: revealjs
+editor: visual
+slide-number: true
+---
+
+## Before we Start
+
+Install tidyverse.
+
+```{r, eval = FALSE, echo = TRUE}
+install.packages(tidyverse)
+```
+
+Download "tidyverse_code.R" from from <https://www.dropbox.com/s/tft4ygqd53i760k/tidyverse_code.R?dl=0> or from QR:
+
+![](images/qrcode_34206142_.png)
+
+## 
+
+## Introduction to Tidyverse
+
+-   Packages are the backbone of R.
+
+-   Anyone can contribute with a package at any time.
+
+-   Some popular packages:
+
+    -   **lme4**: Linear mixed-effects models.
+
+    -   **Rcpp**: Speed R-code with C++.
+
+    -   **caret:** machine learning tools.
+
+    -   **shiny**: elaborate dashboards.
+
+## Pros and Cons of R packages
+
+-   Pros:
+
+    -   Open accessibility generates feedback (through CRAN or GitHub).
+
+    -   New techniques might be quickly available.
+
+-   Cons:
+
+    -   Lack of consistency between packages and methods
+
+    -   Packages could be pulled out at any moment.
+
+    -   Developers could stop maintenance of packages.
+
+    -   Packages might not be reliable.
+
+## What is Tidyverse?
+
+> The tidyverse is an opinionated [**collection of R packages**](https://www.tidyverse.org/packages) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+-   Sponsored by [Posit](https://posit.co/) (formerly RStudio).
+
+-   Perks:
+
+    -   Constant development.
+
+    -   Consistency.
+
+    -   Comprehensive documentation.
+
+## Core Tidyverse Packages
+
+-   Read files
+
+    -   **readr** Fast way to read data.
+
+-   Plot data
+
+    -   **ggplot2** Grammar-of-graphics plots. Plenty of [useful extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+
+## Core Tidyverse Packages (cont'd)
+
+-   Prepare/manipulate data
+
+    -   **dplyr** Data manipulation centered around data frames.
+
+    -   **tidyr** Helper functions to get tidy data.
+
+    -   **purrr** Toolkit to handle vectors and lists.
+
+    -   **tibble** Data frames with attributes to make their content more explicit.
+
+    -   **stringr** Tools to work with strings.
+
+    -   **forcats** Tools to manipulate factors.
+
+    -   **lubridate** (to be included) Date and time operations.
+
+## Packages Loaded by Tidyverse
+
+```{r, eval = TRUE, echo=TRUE, message=TRUE}
+## Packages loaded by tidyverse. Pay attention to message.
+library(tidyverse)
+```
+
+## Alternatives to Tidyverse Packages
+
+-   In R, there might be more than one package doing the same or very similar things.
+
+-   Some alternatives:
+
+    -   **ggplot2** `lattice`, base plots.
+
+    -   **Data manipulation** `data.table`, apply family (`apply`, `sapply`, `mapply`, etc.).
+
+    -   **Read files** `data.table`, base funcions (`read.csv`, `read.delim`, etc.)
+
+## Main Resources
+
+-   [Website of each package](https://www.tidyverse.org/packages/) in tidyverse website.
+
+-   [RStudio Cheatsheets](https://www.rstudio.com/resources/cheatsheets/). Includes others (e.g., shiny, reticulate, Keras, Spark).
+
+-   [R for Data Science](https://r4ds.had.co.nz/) (available online).
+
+## Website of a Tidyverse Package
+
+![Structure of [package website](https://dplyr.tidyverse.org/articles/dplyr.html).](images/website_screenshot.png)
+
+## tibble
+
+-   Data frames with attributes to make their content more explicit.
+
+-   Prints nicer data frames.
+
+-   Column type is clearly visible.
+
+-   Main functions:
+
+    -   `tibble()` Similar to data.frame, but returns a tibble object.
+    -   `as_tibble()` Casts a data frame to tibble by adding attributes
+    -   `tribble()` Creates small data frame.
+
+## readr
+
+-   Fast way to read data.
+-   Main functions:
+    -   `read_csv()` Reads comma-delimited files.
+    -   `read_delim()` Reads delimited files.
+-   Others:
+    -   `cols()` Specifies column types.
+    -   `parse_double()`, `parse_logical()`, etc. Parse specific types.
+
+## dplyr
+
+-   Data manipulation centered around **data frames**.
+
+-   Main functions:
+
+    -   `mutate()` Modifies or adds column (same rows).
+    -   `select()` Keeps specified columns only.
+    -   `filter()` Subsets rows according to a condition (or more than one).
+    -   `summarize()` Summarizes with the provided function (fewer rows)
+    -   `arrange()` Sorts data frame according to provided variables.
+
+## dplyr (cont'd)
+
+-   Check the [documentation instead](https://dplyr.tidyverse.org/reference/index.html). Examples by category:
+
+    -   One table verb. `arrange()`, `distinct()`, ...
+
+    -   Two table verbs. `bind_rows()`, `left_join()`, ...
+
+    -   Grouping. `group_by()`, `ungroup()`, ...
+
+    -   Vector functions. `across()`, `case_when()`, ...
+
+    -   Data. `starwars`, `storms`, ...
+
+    -   Remote table. `sql()`, `collect()`, ...
+
+    -   Experimental. `rows_update()`, `rows_path()`, ...
+
+## tidyr
+
+-   Helper functions to get tidy data. See [documentation](https://tidyr.tidyverse.org/reference/index.html).
+
+-   Main functions:
+
+    -   `pivot_longer()` Pivots data from wide to long.
+    -   `pivot_wider()` Pivots data from long to wide.
+
+-   Other:
+
+    -   `separate()` Separates a column into two or more cols.
+    -   `unite()` Unites multiple columns.
+
+## stringr
+
+-   Tools to work with strings.
+-   Ideal to combine with [regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html).
+-   Some functions:
+    -   `str_replace_all()` Replaces string or regular expression.
+
+    -   `str_detect()` Detects string or regular expression is present.
+
+    -   `str_length()` Returns number of characters.
+
+## forcats
+
+-   Tools to manipulate factors.
+
+-   A factor is used to categorize a variable with a limited number of values (e.g., day/night, tall/grande/venti, etc.)
+
+-   Required for statistical models and plots
+
+-   Some functions:
+
+    -   `fct_reorder()`, `fct_relevel()`, `fct_collapse()`.
+
+## lubridate
+
+-   Date and time operations. Examples:
+
+-   Date/time parsing: `ymd()`, `mdy()`, `ym()`, `ymd_hms()`.
+
+-   Setting, gettting, rounding: `month()`, `week()`, `day()`.
+
+-   Date helpers: `as_date()`, `is.Date()`, `today()`, `now()`.
+
+-   Period: `seconds()`, `days()`, `months()`.
+
+-   Other function categories: intervals, duration, timespans, formatters, others.
+
+## purrr
+
+-   Consistent family of functions to apply to lists and vectors.
+
+-   A list is a collection of R objects without a set structure, unlike data frames, arrays, matrices or vectors.
+
+    ```{r, eval=TRUE, echo = TRUE}
+    ## Example of list with a vector and a matrix.
+    mylist <- list(a_vector = 1:3, a_matrix = matrix(c(1, 2, 3, 4), 2))
+    mylist
+    ```
+
+-   Provides excellent substitutes for the apply family (`apply()`, `mapply()`, `tapply()`, `sapply()`, etc.).
+
+## ggplot2
+
+-   Grammar-of-graphics plots. Plenty of [useful extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+
+-   See [documentation](https://ggplot2.tidyverse.org/).
+
+-   Examples have been covered in class and will be an important part of it.
+
+## More of Tidyverse
+
+-   `readxl` Read Excel documents. Similar to readr.
+
+-   `googlesheets4` Google Sheets.
+
+-   `rvest` Web-scrapping.
+
+-   `jsonlite` JSON.
+
+-   `hms` for time-of-day values.
+
+-   `dbplyr` to convert dplyr into SQL.
+
+-   `tidymodels` A whole new universe to adjust consistent statistical and ML models. Like a tidyverse focus on models.
+
+## Tidyverse-friendly Packages
+
+-   [`fs`](https://www.tidyverse.org/blog/2018/01/fs-1.0.0/) Manage files: Set paths, add, delete or copy files.[^1]
+
+-   [`sf`](https://r-spatial.github.io/sf/) For shapefiles, GeoJSON and similar.
+
+-   [`here`](https://here.r-lib.org/) To unambiguously define your work. Ideal to work on teams via Box, Dropbox, or on different equipments.
+
+-   [`glue`](https://glue.tidyverse.org/) To concatenate strings (paste0(), but better and more flexible).[^2]
+
+-   [`janitor`](https://sfirke.github.io/janitor/) Clean column names and cell content.
+
+[^1]: Just realized it is also part of the Tidyverse.
+
+[^2]: Just realized it is also part of the Tidyverse.
+
+## Questions
+
+Guillermo Basulto-Elias
+
+basulto\@iastate.edu
