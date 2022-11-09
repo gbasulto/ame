@@ -37,7 +37,7 @@ Se hará énfasis en el uso de recursos disponibles para aprender y mejorar la p
 
     -   Guía de funciones base (<https://posit.co/wp-content/uploads/2022/10/base-r.pdf>)
 
-    -   Guía de ggplot2 ([https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf))
+    -   Guía de ggplot2 (<https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf>)
 
 -   Otros:
 
