@@ -180,7 +180,7 @@ myfnc <- function(a, b) {
 3.  Genera 101 valores de una normal con media 0 y desviación estándar 3 y guarda los valores en `e`
 4.  Genera una sucesión de números del 0 al 50 en incrementos de 0.5 y almacena los valores en x.
 5.  Define variables a y b con valores -10 y 0.3.
-6.  Asigna a `y` el vector `a + b * y`
+6.  Asigna a `y` el vector `a + b * x`
 
 ## Ejercicio (Cont.)
 
