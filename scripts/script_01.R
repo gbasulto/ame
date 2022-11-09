@@ -293,3 +293,8 @@ g + geom_jitter(height = 0.15, width = 0.15)  ## Agregando ruido
 
 rm(g)
 
+
+# Ejercicio ---------------------------------------------------------------
+
+
+

@@ -294,3 +294,53 @@ g <- ggplot(
 g + geom_count() ## Conteos
 g + geom_jitter(height = 0.15, width = 0.15)  ## Agregando ruido
 ```
+
+## Ejercicio
+
+-   Replica la siguiente gráfica.
+
+```{r}
+ggplot(
+  data = transform(
+    mtcars, 
+    cyl = as.factor(cyl),
+    `Transmisión` = c("Automática", "Estándar")[am + 1],
+    am = as.factor(am)), 
+  aes(hp, mpg, color = cyl)) +
+  geom_point() +
+  facet_wrap(~ `Transmisión`, labeller = label_both) +
+  labs(x = "HP", y = "MPG", color = "Cilindros:") +
+  theme_light() +
+  theme(legend.position = "bottom")
+```
+
+## Ejercicio
+
+::: columns
+::: {.column width="50%"}
+-   Sugerencias:
+
+    -   Usa `facet_wrap` para separar el gráfico por transmisión.
+
+    -   Usa el parámetro `color` dentro de `aes()`.
+    
+    -   Usa `labs()` y `theme()`
+:::
+
+::: {.column width="50%"}
+```{r}
+ggplot(
+  data = transform(
+    mtcars, 
+    cyl = as.factor(cyl),
+    `Transmisión` = c("Automática", "Estándar")[am + 1],
+    am = as.factor(am)), 
+  aes(hp, mpg, color = cyl)) +
+  geom_point() +
+  facet_wrap(~ `Transmisión`, labeller = label_both) +
+  labs(x = "HP", y = "MPG", color = "Cilindros:") +
+  theme_light() +
+  theme(legend.position = "bottom")
+```
+:::
+:::
