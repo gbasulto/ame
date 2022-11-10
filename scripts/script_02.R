@@ -4,8 +4,8 @@
 
 ## Author: Guillermo Basulto Elías
 ## Created: 2022-09-26
-## Last modified: 2022-11-09
-# Summary: Tidyverse- AME día 2
+## Last modified: 2022-11-10
+## Summary: Tidyverse- AME día 2
 
 # Packages ----------------------------------------------------------------
 library(tidyverse)
@@ -14,27 +14,27 @@ library(janitor)
 
 # tibble ------------------------------------------------------------------
 
-## Define dataframe the regular way
+## Define un cuadro de datos de la forma estándar
 ugly_df <- data.frame(
   a = 1:1000,
   b = sample(x = c("a", "b"), size = 1000, replace = TRUE)
 )
 
-## Print all and first elements
+## Imprime los primeros elementos
 ugly_df
 head(ugly_df)
 
-## Cast it to tibble
+## Convierte el cuadro de datos estándar a una tibble
 beautified_df <- as_tibble(ugly_df)
 beautified_df
 
-## Define it with tibble since the beginning
+## ...O usa tibble desde el principio en lugar de data.frame()
 pretty_df <- tibble(
   a = 1:1000,
   b = sample(x = c("a", "b"), size = 1000, replace = TRUE)
 )
 
-## tribble
+## tribble: crea un cuadro de datos pequeño de manera fácil de leer.
 tribble(
   ~pokemon, ~is_caught, ~is_shiny,
   "Charmander", "yes", "no",
@@ -48,18 +48,19 @@ rm(ugly_df, pretty_df, beautified_df)
 
 # readr -------------------------------------------------------------------
 
+## Consumo de alcohol por país
 url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv"
 
-## Read with base function
+## Leer con función base
 alcohol_default_tbl <- read.csv(url)
 head(alcohol_default_tbl)
 
-## Read with read_csv from readr
-## We will receive a note about columns not being specified.
+## Leer con readr
+## De momento no especificamos tipos de columnas
 alcohol_readr_tbl <- read_csv(url) 
 
-## Use the same function specifying column type
-## No notes this time around.
+## Misma función, especificando los tipos de columnas
+## No recibimos comentarios en esta ocasión
 alcohol_readr2_tbl <- read_csv(
   file = url, 
   col_types = cols(
@@ -68,42 +69,43 @@ alcohol_readr2_tbl <- read_csv(
     spirit_servings = col_double(),
     wine_servings = col_character(),
     total_litres_of_pure_alcohol = col_double()
-  )) 
+  ))
 
-## Do NOT forget to mention how crucial this can be for large datasets and
-## automated processes.
+## NO olvides mencionar la importancia en 
+##    i. cuadros de datos grandes o 
+##    ii. procesos automatizados
 
-## Remove variables
+## Limpia entorno
 rm(alcohol_default_tbl, alcohol_readr_tbl, alcohol_readr2_tbl, url)
 
 # Pipe --------------------------------------------------------------------
 
-## Pipes are used to express a sequence of instructions. Whatever is in the
-## left, passes as firt argument to the right.
+## Las pipas se usan para expresar una sequencia de instrucciones. El lado
+## izquierdo pasa como primer parámetro al lado derecho.
 
-## Tidyverse pipe: %>%
-## Base pipe: |>
-## They are slightly different, but we will not cover that.
+## Pipa Tidyverse: %>%
+## Pipa base: |>
+## Son ligeramente diferentes, pero no cubriremos eso.
 
-## Simplest examples
+## Ejemplos muy simples
 log(9.1)
 9.1 %>% log()
 
 max(pi, 3)
 pi %>% max(3)
 
-## A more elaborated example (but still simple.):
+## Un poco más elaborado:
 
-## The expression
+## La expresión
 seq(-pi, pi, by = 0.1) |> sin() |> plot(type= "l")
 
-## is equivalent to
+## es equivalente a
 seq(-pi, pi, by = 0.1) %>% sin() %>% plot(type= "l")
 
-## Or
+## O
 plot(sin(seq(-pi, pi, by = 0.1)), type = "l")
 
-## Or
+## O
 x <- seq(-pi, pi, by = 0.1)
 y <- sin(x)
 plot(y, type = "l")
@@ -112,27 +114,27 @@ rm(x, y)
 
 # dplyr -------------------------------------------------------------------
 
-## Jon Stewart guests on TDS
+## Invitados de Jon Stewart en TDS
 url <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/daily-show-guests/daily_show_guests.csv"
-## Source: https://github.com/fivethirtyeight/data
+## Fuente: https://github.com/fivethirtyeight/data
 
-## Read data
+## Lee datos directamente de página
 guests_raw_tbl <- read_csv(url)
 guests_raw_tbl
 
-## Clean names this time
+## Limpia nombres de columnas
 guests_tbl <- clean_names(guests_raw_tbl)
 guests_tbl
 
 ## Mutate
-guests_tbl %>% mutate(year_plus_one = year + 1) ## Change a column
-guests_tbl %>% mutate(year = year + 1) ## or overwrite it!
+guests_tbl %>% mutate(year_plus_one = year + 1) ## Cambia una columna
+guests_tbl %>% mutate(year = year + 1) ## O sobreescríbela
 
 ## Select 
-guests_tbl %>% select(show, raw_guest_list) ## Select two
-guests_tbl %>% select(ends_with("list")) ## Fancier selection
-guests_tbl %>% select(matches("o"))
-guests_tbl[, c(1, 2)]
+guests_tbl %>% select(show, raw_guest_list) ## Selecciona dos
+guests_tbl %>% select(ends_with("list"))    ## Opción más sofisticada
+guests_tbl %>% select(matches("o"))         ## Usando expresiones regulares
+guests_tbl[, c(1, 2)]                       ## O índices (trata de evitarlo)
 
 ## Filter
 guests_tbl %>% filter(group == "Musician")
@@ -141,24 +143,24 @@ guests_tbl %>%
            raw_guest_list == "Sen. Hillary Clinton")
 
 ## Summarize
-guests_tbl %>% summarize(counts = length(group)) ## Count guests
-guests_tbl %>% summarize(counts = n()) ## Use n() from dplyr
+guests_tbl %>% summarize(counts = length(group)) ## Cuenta invitados
+guests_tbl %>% summarize(counts = n()) ## Usa n() de dplyr
 guests_tbl %>% 
   group_by(group) %>% 
-  summarize(counts = n()) ## Combine with group_by()
+  summarize(counts = n()) ## Combina with group_by()
 guests_tbl %>% 
   group_by(group, year) %>% 
-  summarize(counts = n()) ## Add another group
+  summarize(counts = n()) ## Agrega otro agrupamiento
 
 ## Arrange
 guests_tbl %>% arrange(group, raw_guest_list)
 
-## Remove datasets
+## Limpia entorno
 rm(url, guests_raw_tbl, guests_tbl)
 
 # tidyr -------------------------------------------------------------------
 
-## Toy example
+## Ejemplo de juguete
 crashes_tbl <- 
   tribble(
     ~site, ~before, ~after, ~aadt, ~rurub, ~file, 
@@ -230,7 +232,7 @@ It's the end"
 
 ## Print
 baby_shark_song
-cat(baby_shark_song) ## Nicer print respecting special characters
+cat(baby_shark_song) ## Usamos cat para respetar líneas nuevas
 
 ## str_replace
 baby_shark_song |>  ## Only the first
@@ -252,23 +254,22 @@ baby_shark_song %>%  ## Must be true
 ## str_length
 baby_shark_song %>% str_length()
 
-## Delete variables
-rm(corn_song)
+## Limpia entorno
+rm(baby_shark_song)
 
 # forcats -----------------------------------------------------------------
-
 
 tod <- rep(c("day", "night", "dawn", "dusk"), c(100, 30, 3, 2))
 
 ## Barplot
 tod %>% qplot(geom = "bar")
 
-## Change to factor (plot does not change)
+## Cambia a factor (gráfico no cambia)
 tod %>% 
   factor() %>% 
   qplot(geom = "bar")
 
-## Set day as first level
+## Fija "day" como el primer nivel
 tod %>% 
   factor() %>% 
   fct_relevel("day") %>% 
@@ -303,34 +304,30 @@ rm(tod)
 
 # lubridate ---------------------------------------------------------------
 
-## Characters to date
+## Caracteres a fechas
 ymd("2022-09-28")
 mdy("09/28/2022")
 
-## Helpers
+## Auxiliares
 today()
 now()
 
-## Extract elements of date
+## Extraer elementos of fechas
 today() %>% month()
 today() %>% month(label = TRUE)
 today() %>% year()
 now() %>% minute()
 
-## Operations
+## Operaciones
 today() - years(1)
 today() - days(30)
 
 # purrr -------------------------------------------------------------------
 
-## From purrr documentation
+## De la documentación de purrr:
 mtcars %>% head()
 mtcars %>%
   split(.$cyl) %>% # from base R
   map(~ lm(mpg ~ wt, data = .)) %>%
   map(summary) %>%
   map_dbl("r.squared")
-
-# ggplot2 -----------------------------------------------------------------
-
-## Will not be covered here

@@ -57,7 +57,7 @@ slide-number: true
 
     -   Documentation amplia y detallada
 
-## Paquetes Nucleares de Tidyverse
+## Paquetes Base de Tidyverse
 
 -   Leer archivos
 
@@ -67,7 +67,7 @@ slide-number: true
 
     -   **ggplot2** Gráficos. Muchas [extensiones útiles](https://exts.ggplot2.tidyverse.org/gallery/).
 
-## Paquetes Nucleares de Tidyverse (cont.)
+## Paquetes Base de Tidyverse (cont.)
 
 -   Preparación/manipulación de datos
 
@@ -106,177 +106,190 @@ library(tidyverse)
 
 ## Principales Recursos
 
--   [Website of each package](https://www.tidyverse.org/packages/) in tidyverse website.
+-   [Sitio de cada paquete](https://www.tidyverse.org/packages/) dentro de la pagina de Tidyverse
 
--   [RStudio Cheatsheets](https://www.rstudio.com/resources/cheatsheets/). Includes others (e.g., shiny, reticulate, Keras, Spark).
+-   [Guías de Posit](https://posit.co/resources/cheatsheets/). Inluye otras (e.g., shiny, reticulate, Keras, Spark)
 
--   [R for Data Science](https://r4ds.had.co.nz/) (available online).
+-   [R for Data Science](https://r4ds.had.co.nz/) (disponible en línea)
 
-## Website of a Tidyverse Package
+## Anatomía del Sitio de Paquetes de Tidyverse
 
-![Structure of [package website](https://dplyr.tidyverse.org/articles/dplyr.html).](images/website_screenshot.png)
+![[Ejemplo](https://dplyr.tidyverse.org/articles/dplyr.html)](images/website_screenshot.png)
 
 ## tibble
 
--   Data frames with attributes to make their content more explicit.
+-   Genera cuadros de datos con atributos
 
--   Prints nicer data frames.
+-   Imprime cuadros de datos sin saturar la pantalla
 
--   Column type is clearly visible.
+-   Exhibe tipos de columnas
 
 -   Main functions:
 
-    -   `tibble()` Similar to data.frame, but returns a tibble object.
-    -   `as_tibble()` Casts a data frame to tibble by adding attributes
-    -   `tribble()` Creates small data frame.
+    -   `tibble()` Similar a data.frame(), mas regresa un objeto tibble
+    -   `as_tibble()` Convierte un cuadro de datos a tibble
+    -   `tribble()` Crea cuadro de datos pequeño
 
 ## readr
 
--   Fast way to read data.
--   Main functions:
-    -   `read_csv()` Reads comma-delimited files.
-    -   `read_delim()` Reads delimited files.
--   Others:
-    -   `cols()` Specifies column types.
-    -   `parse_double()`, `parse_logical()`, etc. Parse specific types.
+-   Lee datos de archivos de texto de manera rápida
+-   Funciones principales:
+    -   `read_csv()` Lee archivos separados con coma
+    -   `read_delim()` Lee archivos separados por espacios
+-   Otras:
+    -   `cols()` Especifica tipo de columnas
+    -   `parse_double()`, `parse_logical()`, etc. Extrae elementos específicos
+
+## Pipa
+
+-   Se usan para expresar una sucesión de instrucciones
+
+-   `|>` en R base (versión 4.2+) o `%>%` en tidyverse
+
+-   El lado izquierdo pasa como primer parámetro a la función del lado derecho (`3 |> f(4)` es equivalente a `f(3, 4)`)
+
+-   Evita guardar objetos innecesarios o re-escribir objectos manteniendo la claridad
 
 ## dplyr
 
--   Data manipulation centered around **data frames**.
+-   Manipulación de datos centrada en **cuadros de datos**.
 
--   Main functions:
+-   Funciones principales:
 
-    -   `mutate()` Modifies or adds column (same rows).
-    -   `select()` Keeps specified columns only.
-    -   `filter()` Subsets rows according to a condition (or more than one).
-    -   `summarize()` Summarizes with the provided function (fewer rows)
-    -   `arrange()` Sorts data frame according to provided variables.
+    -   `mutate()` Añade o redefine columnas (no cambia núm. de renglones).
+    -   `select()` Selecciona número de columnas.
+    -   `filter()` Filtra renglones de acuerdo a una o más conds.
+    -   `summarize()` Agrega columnas con función especificada
+    -   `arrange()` Ordena cuadros de datos respecto a alguna variable.
 
-## dplyr (cont'd)
+## dplyr (cont.)
 
--   Check the [documentation instead](https://dplyr.tidyverse.org/reference/index.html). Examples by category:
+-   Revisa [la documentación](https://dplyr.tidyverse.org/reference/index.html) para muchas más funciones. Ejemplos por categoría:
 
-    -   One table verb. `arrange()`, `distinct()`, ...
+    -   Una tabla. `arrange()`, `distinct()`, ...
 
-    -   Two table verbs. `bind_rows()`, `left_join()`, ...
+    -   Dos tablas. `bind_rows()`, `left_join()`, ...
 
-    -   Grouping. `group_by()`, `ungroup()`, ...
+    -   Agrupamientos. `group_by()`, `ungroup()`, ...
 
-    -   Vector functions. `across()`, `case_when()`, ...
+    -   Vectores. `across()`, `case_when()`, ...
 
-    -   Data. `starwars`, `storms`, ...
+    -   Datos. `starwars`, `storms`, ...
 
-    -   Remote table. `sql()`, `collect()`, ...
+    -   Tablas remotas. `sql()`, `collect()`, ...
 
     -   Experimental. `rows_update()`, `rows_path()`, ...
 
 ## tidyr
 
--   Helper functions to get tidy data. See [documentation](https://tidyr.tidyverse.org/reference/index.html).
+-   Funciones auxiliares para limpiar datos. Ve la [documentación](https://tidyr.tidyverse.org/reference/index.html).
 
--   Main functions:
+-   Principales:
 
-    -   `pivot_longer()` Pivots data from wide to long.
-    -   `pivot_wider()` Pivots data from long to wide.
+    -   `pivot_longer()` Va de formato ancho a largo.
+    -   `pivot_wider()` Va de formato largo a ancho.
 
--   Other:
+-   Otras:
 
-    -   `separate()` Separates a column into two or more cols.
-    -   `unite()` Unites multiple columns.
+    -   `separate()` Separa columna en dos o más cols.
+    -   `unite()` Combina columnas.
 
 ## stringr
 
--   Tools to work with strings.
--   Ideal to combine with [regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html).
--   Some functions:
-    -   `str_replace_all()` Replaces string or regular expression.
+-   Herramientas para trabajar con cadenas.
+-   Ideal para combinar con [expresiones regulares](https://stringr.tidyverse.org/articles/regular-expressions.html).
+-   Algunas funciones:
+    -   `str_replace_all()` Reemplaza cadenas fijas o expresiones regulares.
 
-    -   `str_detect()` Detects string or regular expression is present.
+    -   `str_detect()` Detecta si cadena o expresión regular está presente.
 
-    -   `str_length()` Returns number of characters.
+    -   `str_length()` Regresa el número de caracteres.
 
 ## forcats
 
--   Tools to manipulate factors.
+-   Herramientas para manipular factores
 
--   A factor is used to categorize a variable with a limited number of values (e.g., day/night, tall/grande/venti, etc.)
+-   Los factores se usan para categorizar una variable con un número limitado de valores (e.g., día/noche, alto/grande/venti, etc.)
 
--   Required for statistical models and plots
+-   Requeridos por algunos modelos y gráficos
 
--   Some functions:
+-   Algunas funciones:
 
     -   `fct_reorder()`, `fct_relevel()`, `fct_collapse()`.
 
 ## lubridate
 
--   Date and time operations. Examples:
+-   Operaciones con fechas y estampas de tiempo. Ejemplos:
 
--   Date/time parsing: `ymd()`, `mdy()`, `ym()`, `ymd_hms()`.
+-   Extraer fechas/horas: `ymd()`, `mdy()`, `ym()`, `ymd_hms()`.
 
--   Setting, gettting, rounding: `month()`, `week()`, `day()`.
+-   Extraer, redondear fijar: `month()`, `week()`, `day()`.
 
--   Date helpers: `as_date()`, `is.Date()`, `today()`, `now()`.
+-   Auxiliares de fechas: `as_date()`, `is.Date()`, `today()`, `now()`.
 
--   Period: `seconds()`, `days()`, `months()`.
+-   Periodos: `seconds()`, `days()`, `months()`.
 
--   Other function categories: intervals, duration, timespans, formatters, others.
+-   Otras categorías: intervalos, duración, intervalos, formatear, otros.
 
 ## purrr
 
--   Consistent family of functions to apply to lists and vectors.
+-   Familia consistente de funciones para aplicar a listas y vectores
 
--   A list is a collection of R objects without a set structure, unlike data frames, arrays, matrices or vectors.
+-   Una lista es una colección de objetos de R sin una estructura fija, a diferencia de cuadros de datos, arreglos, matrices o vectores
 
-    ```{r, eval=TRUE, echo = TRUE}
+    ```{r, eval= FALSE, echo = TRUE}
     ## Example of list with a vector and a matrix.
     mylist <- list(a_vector = 1:3, a_matrix = matrix(c(1, 2, 3, 4), 2))
     mylist
     ```
 
--   Provides excellent substitutes for the apply family (`apply()`, `mapply()`, `tapply()`, `sapply()`, etc.).
+-   Provee excelente sustitutos a la familia apply (`apply()`, `mapply()`, `tapply()`, `sapply()`, etc.).
 
 ## ggplot2
 
--   Grammar-of-graphics plots. Plenty of [useful extensions](https://exts.ggplot2.tidyverse.org/gallery/).
+-   Lo cubrimos ayer y veremos más mañana
 
--   See [documentation](https://ggplot2.tidyverse.org/).
+## Más de Tidyverse
 
--   Examples have been covered in class and will be an important part of it.
-
-## More of Tidyverse
-
--   `readxl` Read Excel documents. Similar to readr.
+-   `readxl` Lee documentos de Excel. Parecido a `readr`.
 
 -   `googlesheets4` Google Sheets.
 
--   `rvest` Web-scrapping.
+-   `rvest` Extraer datos de páginas web.
 
 -   `jsonlite` JSON.
 
--   `hms` for time-of-day values.
+-   `hms` para valores de tiempo.
 
--   `dbplyr` to convert dplyr into SQL.
+-   `dbplyr` convierte dplyr en SQL.
 
--   `tidymodels` A whole new universe to adjust consistent statistical and ML models. Like a tidyverse focus on models.
+-   `tidymodels` Todo un universo nuevo para ajustar modelos estadísticos o de *machine learning*. A whole new universe to adjust consistent statistical and ML models.
 
-## Tidyverse-friendly Packages
+    -   Es como un tidyverse enfocado en modelos.
 
--   [`fs`](https://www.tidyverse.org/blog/2018/01/fs-1.0.0/) Manage files: Set paths, add, delete or copy files.[^1]
+## Amigos de Tidyverse
 
--   [`sf`](https://r-spatial.github.io/sf/) For shapefiles, GeoJSON and similar.
+-   [`fs`](https://www.tidyverse.org/blog/2018/01/fs-1.0.0/) Administrar archivos: Fija direcciones. Añade, elimina o copia archivos.
 
--   [`here`](https://here.r-lib.org/) To unambiguously define your work. Ideal to work on teams via Box, Dropbox, or on different equipments.
+-   [`sf`](https://r-spatial.github.io/sf/) Para shapefiles, GeoJSON y similares.
 
--   [`glue`](https://glue.tidyverse.org/) To concatenate strings (paste0(), but better and more flexible).[^2]
+-   [`here`](https://here.r-lib.org/) Fijar entorno de manera no ambigua. Ideal para trabajar en Box, Dropbox, o en diferentes ordenadores
 
--   [`janitor`](https://sfirke.github.io/janitor/) Clean column names and cell content.
+-   [`glue`](https://glue.tidyverse.org/) Concatena cadenas ( como paste(), pero más flexible y elegante).
 
-[^1]: Just realized it is also part of the Tidyverse.
+-   [`janitor`](https://sfirke.github.io/janitor/) Limpia columnas y contenido de columnas.
 
-[^2]: Just realized it is also part of the Tidyverse.
+## Preguntas
 
-## Questions
+-   Durante los siguientes tres días:
 
-Guillermo Basulto-Elias
+    -   A: basulto\@iastate.edu
 
-basulto\@iastate.edu
+    -   Asunto: Duda escuela AME
+
+    -   Cuerpo de correo:
+
+        -   Describe tu pregunta, error.
+
+        -   De preferencia adjunta código que yo pueda ejecutar Por ejemplo, si te sale un error X, adjunta o pega el código que genera ese error.
+
