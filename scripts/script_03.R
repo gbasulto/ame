@@ -73,13 +73,13 @@ rm(datos_credito_tbl)
 # GGally ------------------------------------------------------------------
 
 mtcars |> 
-  mutate(trans = if_else(am == 0, "Manual", "Automática"),
+  mutate(trans = if_else(am == 0, "Automática", "Manual"),
          cyl = as.factor(cyl)) |> 
   ggpairs(columns = c("mpg", "wt", "trans"))
 
 ## Agregando variable de para color
 mtcars |> 
-  mutate(trans = if_else(am == 0, "Manual", "Automática"),
+  mutate(trans = if_else(am == 0, "Automática", "Manual"),
          cyl = as.factor(cyl)) |> 
   ggpairs(columns = c("mpg", "wt", "cyl"), mapping = aes(color = trans))
 
@@ -109,7 +109,6 @@ tibble(x, seno, coseno, tangente) |>
 g1 + g2 + g3
 g3 + (g1 / g2)
 
-
 ## ¿Y si tenemos una lista de gráficas?
 
 g_list <- list(g1, g2, g3)
@@ -136,13 +135,12 @@ rm(fig)
 ## Un ggplot
 
 p1 <- 
-  ggplot(
-  data = transform(
-    mtcars, 
+  mtcars |> 
+  mutate(
     cyl = as.factor(cyl),
     `Transmisión` = c("Automática", "Estándar")[am + 1],
-    am = as.factor(am)), 
-  aes(hp, mpg, color = cyl)) +
+    am = as.factor(am)) |> 
+  ggplot(aes(hp, mpg, color = cyl)) +
   geom_point() +
   facet_wrap(~ `Transmisión`, labeller = label_both) +
   labs(x = "HP", y = "MPG", color = "Cilindros:") +
