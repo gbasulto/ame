@@ -60,6 +60,8 @@ library(ggthemes)
 -   ggimages
 
 -   ggthemes
+
+-   ggforce
 :::
 :::
 
@@ -248,6 +250,8 @@ e +
 -   [`ggimage`](https://yulab-smu.top/pkgdocs/ggimage.html) Combina imágenes con ggplot2
 
 -   [`ggthemes`](https://jrnold.github.io/ggthemes/) Temas predefinidos (como de The Economist, Fivethirtyeight, etc.)
+
+-   [ggforce](https://ggforce.data-imaginist.com/) Contiene `facet_zoom()` y `geom_sina()`, entre otras
 
 ## Preguntas
 

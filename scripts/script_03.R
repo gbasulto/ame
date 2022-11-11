@@ -26,6 +26,7 @@ library(ggpubr)
 library(ggalt)
 library(ggimage)
 library(ggthemes)
+library(ggforce)
 
 # ggmosaic ----------------------------------------------------------------
 
@@ -229,4 +230,40 @@ e +
 rm(e)
 
 
+
+# ggforce -----------------------------------------------------------------
+
+## Ejemplo obtenido de la documentación
+
+ggplot(midwest, aes(state, area)) + geom_point()
+
+# Boxplot and Violin plots convey information on the distribution but not the
+# number of samples, while Jitter does the opposite.
+ggplot(midwest, aes(state, area)) +
+  geom_violin()
+
+ggplot(midwest, aes(state, area)) +
+  geom_jitter()
+
+# Sina does both!
+ggplot(midwest, aes(state, area)) +
+  geom_violin() +
+  geom_sina()
+
+p <- ggplot(midwest, aes(state, popdensity)) +
+  scale_y_log10()
+
+p + geom_sina()
+
+# Colour the points based on the data set's columns
+p + geom_sina(aes(colour = inmetro))
+
+# Or any other way
+cols <- midwest$popdensity > 10000
+p + geom_sina(colour = cols + 1L)
+
+# Sina plots with continuous x:
+ggplot(midwest, aes(cut_width(area, 0.02), popdensity)) +
+  geom_sina() +
+  scale_y_log10()
 
