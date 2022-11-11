@@ -2,6 +2,7 @@
 title: "Fundamentos de Programación y Visualización de Datos en R"
 subtitle: "Extensiones de GGPLOT2"
 author: "Guillermo Basulto Elías"
+date: 2022-11-11
 format: revealjs
 editor: visual
 ---
