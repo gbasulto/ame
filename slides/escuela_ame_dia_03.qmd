@@ -54,21 +54,17 @@ library(esquisse)
 
 ```
 
-## Quarto
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+## Preguntas
 
-## Bullets
+-   Durante los siguientes tres días:
 
-When you click the **Render** button a document will be generated that includes:
+    -   A: basulto\@iastate.edu
 
--   Content authored with markdown
--   Output from executable code
+    -   Asunto: Duda escuela AME
 
-## Code
+    -   Cuerpo de correo:
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+        -   Describe tu pregunta, error.
 
-```{r}
-1 + 1
-```
+        -   De preferencia adjunta código que yo pueda ejecutar Por ejemplo, si te sale un error X, adjunta o pega el código que genera ese error.
