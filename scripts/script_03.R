@@ -218,7 +218,8 @@ e +
   geom_label_repel(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3,
                    box.padding = 0.5,
                    segment.curvature = -0.2) +
-  geom_point() 
+  geom_point() +
+  theme_bw()
 
 ## Con texto
 e + 

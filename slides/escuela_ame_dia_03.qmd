@@ -46,6 +46,7 @@ library(ggthemes)
 -   GGally
 -   patchwork
 -   plotly
+-   esquisse
 -   gghighlight
 :::
 
