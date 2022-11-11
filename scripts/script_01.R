@@ -224,7 +224,7 @@ g_base
 ## Área
 g_base + geom_area(stat = "bin")
 
-## Denssidad
+## Densidad
 g_base + geom_density(kernel = "gaussian")
 
 ## Gráfico de puntos

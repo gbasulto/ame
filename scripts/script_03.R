@@ -11,9 +11,11 @@ library(tidyverse)
 library(janitor)
 library(datos)
 library(ggplot2)
+library(gapminder)
 
 ## Extensiones
 library(ggmosaic)
+library(GGally)
 library(patchwork)
 library(plotly)
 library(esquisse)
@@ -65,6 +67,20 @@ datos_credito_tbl |>
   coord_flip()
 
 rm(datos_credito_tbl)
+
+
+# GGally ------------------------------------------------------------------
+
+mtcars |> 
+  mutate(trans = if_else(am == 0, "Manual", "Automática"),
+         cyl = as.factor(cyl)) |> 
+  ggpairs(columns = c("mpg", "wt", "trans"))
+
+## Agregando variable de para color
+mtcars |> 
+  mutate(trans = if_else(am == 0, "Manual", "Automática"),
+         cyl = as.factor(cyl)) |> 
+  ggpairs(columns = c("mpg", "wt", "cyl"), mapping = aes(color = trans))
 
 # patchwork ---------------------------------------------------------------
 
@@ -146,37 +162,70 @@ rm(mtcars)
 
 # gganimate ---------------------------------------------------------------
 
-ggplot(mtcars, aes(factor(cyl), mpg)) + 
-  geom_boxplot() + 
-  # Here comes the gganimate code
-  transition_states(
-    gear,
-    transition_length = 2,
-    state_length = 1
-  ) +
-  enter_fade() + 
-  exit_shrink() +
-  ease_aes('sine-in-out')
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  # Here comes the gganimate specific bits
+  labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')
 
 
-# library(gganimate)
-# library(gghighlight)
-# library(ggrepel)
-# library(ggpubr)
-# library(ggalt)
-# library(ggimage)
-# library(ggthemes)
+# gghighlight -------------------------------------------------------------
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  gghighlight(year == 2002)
+
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  gghighlight(year == 2007)
 
 
-ggplot(mtcars, aes(factor(cyl), mpg)) + 
-  geom_boxplot() + 
-  # Here comes the gganimate code
-  transition_states(
-    gear,
-    transition_length = 2,
-    state_length = 1
-  ) +
-  enter_fade() + 
-  exit_shrink() +
-  ease_aes('sine-in-out')
+# ggrepel -----------------------------------------------------------------
+
+e <- ggplot(
+  data = transform(mtcars, 
+                   car = row.names(mtcars)), 
+  aes(hp, mpg))
+
+e ## Base
+e + geom_point()  # Puntos
+
+## El que sabemos hacer
+e + 
+  geom_label(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3) +
+  geom_point()
+
+## Cong ggrepel
+e + 
+  geom_label_repel(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3) +
+  geom_point() 
+
+## Un poco mejorado
+e + 
+  geom_label_repel(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3,
+                   box.padding = 0.5,
+                   segment.curvature = -0.2) +
+  geom_point() 
+
+## Con texto
+e + 
+  geom_text_repel(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3) +
+  geom_point() 
+
+rm(e)
+
+
 

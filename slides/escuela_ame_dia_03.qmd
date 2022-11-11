@@ -1,22 +1,54 @@
 ---
 title: "Fundamentos de Programación y Visualización de Datos en R"
+subtitle: "Extensiones de GGPLOT2"
 author: "Guillermo Basulto Elías"
 format: revealjs
 editor: visual
 ---
 
-## Packages
+## Extensiones de GGPLOT2
 
--   ggplot2
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Packages ----------------------------------------------------------------
 
+library(tidyverse)
+library(janitor)
+library(datos)
+library(ggplot2)
+library(gapminder)
+
+## Extensiones
+library(ggmosaic)
+library(GGally)
+library(patchwork)
+library(plotly)
+library(esquisse)
+library(gganimate)
+library(gghighlight)
+library(ggrepel)
+library(ggpubr)
+library(ggalt)
+library(ggimage)
+library(ggthemes)
+
+```
+
+-   Tidyverse provee una lista de extensiones ([aquí](https://exts.ggplot2.tidyverse.org/))
+
+-   También proveen instrucciones para crear una extensión ([aquí](https://github.com/ggplot2-exts/gallery#adding-a-ggplot2-extension))
+
+## Algunas Extensiones y Paquetes Compatibles
+
+::: columns
+::: {.column width="50%"}
 -   ggmosaic
-
+-   GGally
 -   patchwork
-
 -   plotly
-
 -   gghighlight
+:::
 
+::: {.column width="50%"}
 -   ggrepel
 
 -   ggpubr
@@ -26,34 +58,194 @@ editor: visual
 -   ggimages
 
 -   ggthemes
+:::
+:::
 
-## ttt
+## GGMOSAIC
+
+-   Sirve para generar gráficas de mosaico
+
+-   Enlace [aquí](https://haleyjeppson.github.io/ggmosaic/)
+
+-   Útil para comparar proporciones
+
+## GGMOSAIC
 
 ```{r}
-library(ggplot2)
+datos_credito_tbl <- datos_credito |> clean_names() |> as_tibble()
 
-library(gghighlight)
+## Misma idea, grafica mejorada
+datos_credito_tbl |>
+  mutate(
+    estado_civil = 
+      estado_civil |> 
+      fct_relevel("casado", "viudo", "soltero", "divorciado") |> 
+      fct_collapse(`sep/div` = c("separado", "divorciado"))
+    ) |> 
+  drop_na(estado_civil) |> 
+  ggplot() +
+  geom_mosaic(aes(x = product(estado_civil), fill = estado)) +
+  scale_fill_brewer(palette="Set1") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  coord_flip()
+```
 
-library(ggrepel)
+## GGALLY
 
-library(ggpubr)
+-   Enlace [aquí](https://ggobi.github.io/ggally/)
 
-library(patchwork)
+-   Produce matrix de pares de datos
 
-library(ggalt)
+## GGALLY
 
-library(ggimage)
+```{r}
+mtcars |> 
+  mutate(trans = if_else(am == 0, "Manual", "Automática"),
+         cyl = as.factor(cyl)) |> 
+  ggpairs(columns = c("mpg", "wt", "cyl"), mapping = aes(color = trans))
+```
 
-library(ggmosaic)
+## PATCHWORK
 
-library(ggthemes)
+-   Enlace [aquí](https://patchwork.data-imaginist.com/index.html)
 
-library(plotly)
+-   Es útil para hacer arreglos de gráficos de `ggplot2` de manera muy simple
 
-library(esquisse)
+-   Los aggreglos pueden surgir de gráficas individuales o de una lista de gráficas
+
+-   También permite combinar tablas al lado de gráficas
+
+## PATCHWORK
+
+```{r}
+## Simulamos datos
+x <- seq(-pi + 1e-3, pi - 1e-3, length.out = 200)
+seno <- sin(x)
+coseno <- cos(x)
+tangente <- tan(x)
+
+## Generamos tres gráficas
+g1 <- ggplot(data = NULL, aes(x, seno)) + geom_line() + theme_bw()
+g2 <- ggplot(data = NULL, aes(x, coseno)) + geom_line() + theme_bw()
+g3 <- ggplot(data = NULL, aes(x, tangente)) + geom_line() + theme_bw()
+
+## ¿Y si las gráficas son de differente índole? ¡Usamos patchwork!
+g3 + (g1 / g2)
 
 ```
 
+## PLOTLY
+
+-   Enlace [aquí](https://plotly.com/r/)
+
+-   Genera gráficas interactivas de calidad
+
+-   No es exclusiva para `ggplot2`
+
+-   Convierte gráficas a JavaScript
+
+-   Tiene herramientas para gráficas tridimensionales
+
+## PLOTLY
+
+-   La siguiente NO es una gráfica de `ggplot2`
+
+```{r}
+# volcano is a numeric matrix that ships with R
+fig <- plot_ly(z = ~volcano)
+fig <- fig %>% add_surface()
+
+fig
+```
+
+## PLOTLY
+
+```{r}
+p1 <- 
+  ggplot(
+  data = transform(
+    mtcars, 
+    cyl = as.factor(cyl),
+    `Transmisión` = c("Automática", "Estándar")[am + 1],
+    am = as.factor(am)), 
+  aes(hp, mpg, color = cyl)) +
+  geom_point() +
+  facet_wrap(~ `Transmisión`, labeller = label_both) +
+  labs(x = "HP", y = "MPG", color = "Cilindros:") +
+  theme_light() +
+  theme(legend.position = "bottom")
+
+ggplotly(p1)
+```
+
+## ESQUISSE
+
+-   Enlace [aquí](https://dreamrs.github.io/esquisse/)
+
+-   Permite exportar todas las gráficas en el entorno a PPTX
+
+-   Tiene una interfaz para explorar los datos usando `ggplot2`
+
+-   ¡Y permite exportar el código!
+
+## GGANIMATE
+
+-   Enlace [aquí](https://gganimate.com/)
+
+-   Permite crear animaciones
+
+-   GIFs u otros
+
+-   Ver ejemplo en código
+
+## GGHIGHLIGHT
+
+-   Enlace [aquí](https://yutannihilation.github.io/gghighlight/)
+
+-   Resalta geometrías en gráfica de `ggplot2`
+
+## GGHIGHLIGHT
+
+```{r}
+ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, colour = country)) +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  scale_colour_manual(values = country_colors) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  facet_wrap(~continent) +
+  gghighlight(year == 2002)
+```
+
+## GGREPEL
+
+-   Enlace [aquí](https://ggrepel.slowkow.com/index.html)
+
+-   Geometrías para repelir texto y etiquetas
+
+## GGREPEL
+
+```{r}
+e <- ggplot(
+  data = transform(mtcars, 
+                   car = row.names(mtcars)), 
+  aes(hp, mpg))
+
+e + 
+  geom_label_repel(aes(label = car), nudge_x = 1, nudge_y = 1, size = 3) +
+  geom_point() 
+
+```
+
+## Otros Paquetes
+
+-   [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/) Prepara gráficos para publicaciones
+
+-   [`ggalt`](https://yonicd.github.io/ggalt/articles/dumbell.html) Varias alternativas a geometrías base de ggplot2, pero resaltan las gráficas "dumbbell"
+
+-   [`ggimage`](https://yulab-smu.top/pkgdocs/ggimage.html) Combina imágenes con ggplot2
+
+-   [`ggthemes`](https://jrnold.github.io/ggthemes/) Temas predefinidos (como de The Economist, Fivethirtyeight, etc.)
 
 ## Preguntas
 
